@@ -26,7 +26,7 @@ function setTargets(item) {
 function findItemsAndSetTargets(list) {
   var defaultDuration = parseInt(list.getAttribute("jbn-tfilter-duration")) || 60;
   var range = list.getAttribute("jbn-tfilter-range") || "past";
-  var items = list.querySelectorAll('[jbn-tfilter-element="item"]');
+  var items = list.querySelectorAll('[jbn-tfilter="element"]');
   var i = 0;
   for (i = 0; i < items.length; i++) {
     var item = items[i];
@@ -45,7 +45,7 @@ function findItemsAndSetTargets(list) {
 }
 
 function parseLists() {
-  var lists = document.querySelectorAll('[jbn-tfilter-element="list"]');
+  var lists = document.querySelectorAll('[jbn-tfilter="list"]');
   var i = 0;
   for (i = 0; i < lists.length; i++) {
     var list = lists[i];
