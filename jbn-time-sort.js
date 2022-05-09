@@ -2,7 +2,6 @@ function validateTimeStamp(itemDate, range, duration) {
   if (itemDate.isValid()) {
     var today = moment().utcOffset(2);
     var diff = itemDate.diff(today, "seconds");
-    console.log(diff);
     duration = duration * 60;
     if (range == "past" && diff + duration < 0) {
       return true;
