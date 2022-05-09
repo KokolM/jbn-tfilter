@@ -1,12 +1,14 @@
 function validateTimeStamp(itemDate, range, duration) {
   if (itemDate.isValid()) {
     var today = moment().utcOffset(2);
-    var diff = itemDate.diff(today, "minutes");
+    var diff = itemDate.diff(today, "seconds");
+    console.log(diff);
+    duration = duration * 60;
     if (range == "past" && diff + duration < 0) {
       return true;
     } else if (range == "future" && diff > 0) {
       return true;
-    } else if (range == "live" && diff + duration >= 0) {
+    } else if (range == "live" && diff <= 0 && diff + duration >= 0) {
       return true;
     }
   }
