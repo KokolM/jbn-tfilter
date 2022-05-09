@@ -16,7 +16,6 @@ function validateTimeStamp(itemDate, range, duration) {
 
 function setTargets(item) {
   var targets = item.querySelectorAll("[jbn-tfilter-display]");
-  console.log(targets);
   var i = 0;
   for (i = 0; i < targets.length; i++) {
     var target = targets[i];
@@ -29,7 +28,6 @@ function findItemsAndSetTargets(list) {
   var defaultDuration = parseInt(list.getAttribute("jbn-tfilter-duration")) || 60;
   var range = list.getAttribute("jbn-tfilter-range") || "past";
   var items = list.querySelectorAll('[jbn-tfilter="element"]');
-  console.log(items);
   var i = 0;
   for (i = 0; i < items.length; i++) {
     var item = items[i];
@@ -50,7 +48,6 @@ function findItemsAndSetTargets(list) {
 function parseLists() {
   var lists = document.querySelectorAll('[jbn-tfilter="list"]');
   var i = 0;
-  console.log(lists);
   for (i = 0; i < lists.length; i++) {
     var list = lists[i];
     findItemsAndSetTargets(list);
