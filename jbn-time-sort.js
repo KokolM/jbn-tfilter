@@ -21,13 +21,13 @@ function setTargets(item) {
   }
 }
 
-function setLiveTargets(item) {
+function setLiveTargets(item, hide) {
   var targets = item.querySelectorAll("[jbn-tfilter-display-live]");
   var i = 0;
   for (i = 0; i < targets.length; i++) {
     var target = targets[i];
     var display = target.getAttribute("jbn-tfilter-display-live");
-    target.style.display = display;
+    target.style.display = hide ? "none": display;
   }
 }
 
@@ -46,7 +46,9 @@ function validateTimeStamp(item, range, defaultDuration) {
         return;
       } else if (range == "future" && isFuture(diff, duration)) {
         if (isLive(diff, duration)) {
-          setLiveTargets(item);
+          setLiveTargets(item, false);
+        } else {
+          setLiveTargets(item, true);
         }
         setTargets(item);
         return;

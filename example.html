@@ -17,7 +17,7 @@
             <div class="live-now-in-thumbnail">
               <div class="streaming-now-wrapper">
                 <div class="streaming-now-tag">
-                  <div class="text-block-10" style="display: none;" jbn-tfilter-display-live="block">Práve prebieha</div>
+                  <div class="text-block-10" jbn-tfilter-display-live="block">Práve prebieha</div>
                 </div>
               </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="live-now-in-thumbnail">
               <div class="streaming-now-wrapper">
                 <div class="streaming-now-tag">
-                  <div class="text-block-10" style="display: none;" jbn-tfilter-display-live="block">Práve prebieha</div>
+                  <div class="text-block-10" jbn-tfilter-display-live="block">Práve prebieha</div>
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
             <div class="live-now-in-thumbnail">
               <div class="streaming-now-wrapper">
                 <div class="streaming-now-tag">
-                  <div class="text-block-10" style="display: none;">Práve prebieha</div>
+                  <div class="text-block-10">Práve prebieha</div>
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@
             <div class="live-now-in-thumbnail">
               <div class="streaming-now-wrapper">
                 <div class="streaming-now-tag">
-                  <div class="text-block-10" style="display: none;">Práve prebieha</div>
+                  <div class="text-block-10">Práve prebieha</div>
                 </div>
               </div>
             </div>
@@ -117,3 +117,32 @@
 </body>
 
 </html>
+
+
+<div jbn-tfilter="list" jbn-tfilter-range="future">
+  <div jbn-tfilter="element">
+    <div> Video 1 </div>
+    <div jbn-tfilter-display-live="block"> Prave teraz </div>
+    <div jbn-tfilter-element="date">1.8.2022</div>
+    <div jbn-tfilter-element="time">10:40</div>
+  </div>
+  <div jbn-tfilter="element">
+    <div> Video 2 </div>
+    <div jbn-tfilter-display-live="block"> Prave teraz </div>
+    <div jbn-tfilter-element="date">1.8.2022</div>
+    <div jbn-tfilter-element="time">10:40</div>
+  </div>
+</div>
+
+<div jbn-tfilter="list" jbn-tfilter-range="past">
+  <div jbn-tfilter="element">
+    <div> Video 1 </div>
+    <div jbn-tfilter-element="date">1.8.2022</div>
+    <div jbn-tfilter-element="time" jbn-tfilter-display="none">10:40</div>
+  </div>
+  <div jbn-tfilter="element">
+    <div> Video 2 </div>
+    <div jbn-tfilter-element="date">1.8.2022</div>
+    <div jbn-tfilter-element="time" jbn-tfilter-display="none">10:40</div>
+  </div>
+</div>
