@@ -1,17 +1,14 @@
-function validateTimeStamp(itemDate, range, duration) {
-  if (itemDate.isValid()) {
-    var today = moment().utcOffset(2);
-    var diff = itemDate.diff(today, "seconds");
-    duration = duration * 60;
-    if (range == "past" && diff + duration < 0) {
-      return true;
-    } else if (range == "future" && diff > 0) {
-      return true;
-    } else if (range == "live" && diff <= 0 && diff + duration >= 0) {
-      return true;
-    }
-  }
-  return false;
+
+function isLive(diff, duration) {
+  return diff <= 0 && diff + duration >= 0;
+}
+
+function isFuture(diff, duration) {
+  return isLive(diff, duration) || diff > 0;
+}
+
+function isPast(diff, duration) {
+  return diff + duration < 0;
 }
 
 function setTargets(item) {
@@ -24,6 +21,44 @@ function setTargets(item) {
   }
 }
 
+function setLiveTargets(item) {
+  var targets = item.querySelectorAll("[jbn-tfilter-display-live]");
+  var i = 0;
+  for (i = 0; i < targets.length; i++) {
+    var target = targets[i];
+    var display = target.getAttribute("jbn-tfilter-display-live");
+    target.style.display = display;
+  }
+}
+
+function validateTimeStamp(item, range, defaultDuration) {
+  var date = item.querySelector('[jbn-tfilter-element="date"]');
+  var time = item.querySelector('[jbn-tfilter-element="time"]');
+  var duration = parseInt(item.querySelector('[jbn-tfilter-element="duration"]')?.innerText) || defaultDuration;
+  if (date && time) {
+    var itemDate = moment(date.innerText + " " + time.innerText, "DD.MM.YYYY hh:mm");
+    if (itemDate.isValid()) {
+      var today = moment().utcOffset(2);
+      var diff = itemDate.diff(today, "seconds");
+      duration = duration * 60;
+      if (range == "past" && isPast(diff, duration)) {
+        setTargets(item);
+        return;
+      } else if (range == "future" && isFuture(diff, duration)) {
+        if (isLive(diff, duration)) {
+          setLiveTargets(item);
+        }
+        setTargets(item);
+        return;
+      } else if (range == "live" && isLive(diff, duration)) {
+        setTargets(item);
+        return;
+      }
+    }
+  }
+  item.style.display = "none";
+}
+
 function findItemsAndSetTargets(list) {
   var defaultDuration = parseInt(list.getAttribute("jbn-tfilter-duration")) || 60;
   var range = list.getAttribute("jbn-tfilter-range") || "past";
@@ -31,17 +66,7 @@ function findItemsAndSetTargets(list) {
   var i = 0;
   for (i = 0; i < items.length; i++) {
     var item = items[i];
-    var date = item.querySelector('[jbn-tfilter-element="date"]');
-    var time = item.querySelector('[jbn-tfilter-element="time"]');
-    var duration = parseInt(item.querySelector('[jbn-tfilter-element="duration"]')?.innerText) || defaultDuration;
-    if (date && time) {
-      var itemDate = moment(date.innerText + " " + time.innerText, "DD.MM.YYYY hh:mm");
-      if (validateTimeStamp(itemDate, range, duration)) {
-        setTargets(item);
-      } else {
-        item.style.display = "none";
-      }
-    }
+    validateTimeStamp(item, range, defaultDuration);
   }
 }
 
